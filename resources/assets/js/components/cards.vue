@@ -7,45 +7,20 @@
 </template>
 
 <script>
-import axios from 'axios';
-import VueMasonryPlugin from 'vue-masonry';
-Vue.use(VueMasonryPlugin);
+
 
 export default {
     data: function(){
             return {
-                posts: [],
-                search_metadata: {}
+
             }
         },
-    props: ['showModal'],
+    props: ['showModal','posts','search_metadata'],
     methods: {
-        tryAddOptions: function(meta){
-            var options = {}
-            console.log(meta);
-            if (meta !== undefined){
-                options = {
-                    max_id: meta.max_id
-                }
-            }
-                
-            return options;
-        },
-        getNewPosts: function(meta){
-            axios.post('/post', this.tryAddOptions(meta))
-            .then((response) => {
-                this.posts = response.data.statuses;
-                this.meta = response.data.search_metadata;
-            })
-            .catch((error) => { console.log(error); });
-        },
         open: function(index){
             this.$emit('open')
         }
-    },
-    mounted() {
-        this.getNewPosts ();
-    } 
+    }
 }
 </script>
 

@@ -19,13 +19,13 @@
     </head>
     <body>
       <div class="wrapper" id="app">
-        <cards @open="openModal" :show-modal="showModal"></cards>
+        <cards @open="openModal" :posts="posts" :show-modal="showModal"></cards>
         <!--<div class="masonry" v-masonry transition-duration="0.3s" item-selector=".masonry__tile">-->
         <!--  <div class="masonry__tile" v-for="(post, index) in posts">-->
         <!--      <a @click="open(index)"><img class="tile__image" :src="post.media_url" alt="Image"></a>-->
         <!--  </div>            -->
-        <modal :show-modal="showModal" :modal-data="modalData" v-if="showModal" @close="closeModal"></modal>
-        <button @click="getNewPosts(this.meta.max_id)">next</button>
+        <modal :show-modal="showModal" :posts="posts" v-if="showModal" @close="closeModal"></modal>
+        <button @click="getNewPosts($data.search_metadata.max_id)">next</button>
       </div>
 
         <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->

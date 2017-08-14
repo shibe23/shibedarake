@@ -17,8 +17,9 @@ class PostController extends Controller
         $param['result_type'] = 'recent';
         $param['include_entities'] = true;
 
-        if(isset($_GET['max_id'])) {
-            $param['max_id'] = $_GET['max_id'];
+        if(isset($_POST['max_id'])) {
+            // max_idがあればパラメータにセットする
+            $param['max_id'] = $_POST['max_id'];
         }
 
         $statuses = [];
@@ -53,7 +54,7 @@ class PostController extends Controller
         // JSON整形処理
         $result['statuses'] = $statuses;
         $result['search_metadata'] = $max_id;
-        
+
         echo json_encode($result, true);
     }
 }

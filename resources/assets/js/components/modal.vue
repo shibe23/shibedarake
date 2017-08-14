@@ -2,7 +2,9 @@
 <div class="modal is-active">
   <div class="modal-background"></div>
   <div class="modal-content">
-    <!-- Any other Bulma elements you want -->
+    <figure class="image">
+      <img :src="image_url">
+    </figure>
   </div>
   <button @click="close()" class="modal-close is-large" aria-label="close"></button>
 </div>
@@ -12,10 +14,13 @@
 export default {
     data: function(){
             return {
-                // showModal: false
+                modalData: {
+                    image_url: "",
+                    author: ""
+                }
             }
         },
-    props: ['showModal'],
+    props: ['showModal','posts','search_metadata'],
     methods: {
         close: function(){
             this.$emit('close')
