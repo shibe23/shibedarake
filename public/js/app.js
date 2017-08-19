@@ -11545,7 +11545,11 @@ new Vue({
         search_metadata: {},
         showModal: false,
         modalData: {
-            img_url: ""
+            screen_name: "",
+            image_url: "",
+            text: "",
+            id_str: "",
+            post_url: ""
         }
     },
     methods: {
@@ -11563,16 +11567,19 @@ new Vue({
             var _this = this;
 
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/post', this.tryAddOptions(meta)).then(function (response) {
-                var arr = response.data.statuses;
-                for (var i = 0, n = arr.length; i < n; i++) {
-                    _this.posts.push(arr[i]);
-                }
+                _this.posts = _this.posts.concat(response.data.statuses);
                 _this.search_metadata = response.data.search_metadata;
             }).catch(function (error) {
                 console.log(error);
             });
         },
-        openModal: function openModal() {
+        openModal: function openModal(index) {
+            var URL = "https://twitter.com/";
+            this.modalData.image_url = this.posts[index].media_url;
+            this.modalData.id_str = this.posts[index].id_str;
+            this.modalData.screen_name = this.posts[index].user_screen_name;
+            this.modalData.text = this.posts[index].text;
+            this.modalData.post_url = URL + this.posts[index].user_screen_name + "/status/" + this.posts[index].id_str;
             this.showModal = true;
         },
         closeModal: function closeModal() {
@@ -12451,10 +12458,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {};
     },
-    props: ['showModal', 'posts', 'search_metadata'],
+    props: ['showModal', 'posts', 'modalData', 'search_metadata'],
     methods: {
         open: function open(index) {
-            this.$emit('open');
+            this.$emit('open', index);
         }
     }
 });
@@ -12477,17 +12484,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {
-            modalData: {
-                image_url: "",
-                author: ""
-            }
-        };
+        return {};
     },
-    props: ['showModal', 'posts', 'search_metadata'],
+    props: ['showModal', 'posts', 'modalData', 'search_metadata'],
     methods: {
         close: function close() {
             this.$emit('close');
@@ -25622,16 +25648,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     staticClass: "modal is-active"
   }, [_c('div', {
-    staticClass: "modal-background"
+    staticClass: "modal-background",
+    on: {
+      "click": function($event) {
+        _vm.close()
+      }
+    }
   }), _vm._v(" "), _c('div', {
     staticClass: "modal-content"
   }, [_c('figure', {
     staticClass: "image"
   }, [_c('img', {
     attrs: {
-      "src": _vm.image_url
+      "src": _vm.modalData.image_url
     }
-  })])]), _vm._v(" "), _c('button', {
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "media-content"
+  }, [_c('div', {
+    staticClass: "content"
+  }, [_c('p', [_c('strong', [_vm._v("John Smith")]), _vm._v(" "), _c('small', [_vm._v("@johnsmith")]), _vm._v(" "), _c('small', [_vm._v("31m")]), _vm._v(" "), _c('br'), _vm._v("\n          " + _vm._s(_vm.modalData.text) + "\n        ")])]), _vm._v(" "), _vm._m(0)])]), _vm._v(" "), _c('button', {
     staticClass: "modal-close is-large",
     attrs: {
       "aria-label": "close"
@@ -25642,7 +25677,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }
   })])
-},staticRenderFns: []}
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('nav', {
+    staticClass: "level is-mobile"
+  }, [_c('div', {
+    staticClass: "level-left"
+  }, [_c('a', {
+    staticClass: "level-item"
+  }, [_c('span', {
+    staticClass: "icon is-small"
+  }, [_c('i', {
+    staticClass: "fa fa-reply"
+  })])]), _vm._v(" "), _c('a', {
+    staticClass: "level-item"
+  }, [_c('span', {
+    staticClass: "icon is-small"
+  }, [_c('i', {
+    staticClass: "fa fa-retweet"
+  })])]), _vm._v(" "), _c('a', {
+    staticClass: "level-item"
+  }, [_c('span', {
+    staticClass: "icon is-small"
+  }, [_c('i', {
+    staticClass: "fa fa-heart"
+  })])])])])
+}]}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()

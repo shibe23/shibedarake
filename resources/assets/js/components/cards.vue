@@ -15,10 +15,10 @@ export default {
 
             }
         },
-    props: ['showModal','posts','search_metadata'],
+    props: ['showModal','posts', 'modalData', 'search_metadata'],
     methods: {
         open: function(index){
-            this.$emit('open')
+            this.$emit('open', index)
         }
     }
 }

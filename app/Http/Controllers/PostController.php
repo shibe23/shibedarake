@@ -38,6 +38,7 @@ class PostController extends Controller
                     }
                 }
                 $data += array('created_at'=> $value->created_at);
+                $data += array('id_str'=> $value->id_str);
                 $data += array('user_name'=> $value->user->name);
                 $data += array('user_screen_name'=> $value->user->screen_name);
                 $data += array('user_img'=> $value->user->profile_image_url);

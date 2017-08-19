@@ -30,7 +30,11 @@ new Vue({
       search_metadata: {},
       showModal: false,
       modalData: {
-        img_url: ""
+        screen_name: "",
+        image_url: "",
+        text: "",
+        id_str: "",
+        post_url: ""
       }
   },
   methods: {
@@ -47,20 +51,23 @@ new Vue({
         getNewPosts: function(meta){
             axios.post('/post', this.tryAddOptions(meta))
             .then((response) => {
-                var arr = response.data.statuses;
-                for(var i = 0, n = arr.length; i < n; i++){
-                  this.posts.push(arr[i]);
-                }
+                this.posts = this.posts.concat(response.data.statuses);
                 this.search_metadata = response.data.search_metadata;
             })
             .catch((error) => { console.log(error); });
         },
-      openModal: function(){
-          this.showModal = true
-      },
-      closeModal: function(){
-          this.showModal = false
-      }
+        openModal: function(index){
+            var URL = "https://twitter.com/"
+            this.modalData.image_url = this.posts[index].media_url;
+            this.modalData.id_str = this.posts[index].id_str;
+            this.modalData.screen_name = this.posts[index].user_screen_name;
+            this.modalData.text = this.posts[index].text;
+            this.modalData.post_url = URL + this.posts[index].user_screen_name + "/status/" + this.posts[index].id_str;
+            this.showModal = true
+        },
+        closeModal: function(){
+            this.showModal = false
+        }
   },
   mounted() {
       this.getNewPosts ();
