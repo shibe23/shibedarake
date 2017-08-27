@@ -1,32 +1,43 @@
 <template>
-<div class="modal is-active">
+<div id="modal" class="modal is-active">
   <div class="modal-background" @click="close()"></div>
   <div class="modal-content">
-    <figure class="image">
-      <img :src="modalData.image_url">
-    </figure>
 
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-          <br>
-          {{ modalData.text}}
-        </p>
+    <div class="card">
+      <div class="card-image">
+        <figure class="image">
+          <img :src="modalData.image_url">
+        </figure>
       </div>
-      <nav class="level is-mobile">
-        <div class="level-left">
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-reply"></i></span>
-          </a>
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-          </a>
-          <a class="level-item">
-            <span class="icon is-small"><i class="fa fa-heart"></i></span>
-          </a>
+      <div class="card-content">
+        <div class="media">
+          <!--<div class="media-left">-->
+          <!--  <figure class="image is-48x48">-->
+          <!--    <img :src="modalData.image_url">-->
+          <!--  </figure>-->
+          <!--</div>-->
+          <div class="media-content">
+            <p class="title is-4">{{ modalData.screen_name}}</p>
+          </div>
         </div>
-      </nav>
+    
+        <div class="content">
+          {{ modalData.text}}
+        </div>
+          <nav class="level is-mobile">
+            <div class="level-left">
+              <a class="level-item">
+                <span class="icon is-small"><i class="fa fa-reply"></i></span>
+              </a>
+              <a class="level-item">
+                <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+              </a>
+              <a class="level-item">
+                <span class="icon is-small"><i class="fa fa-heart"></i></span>
+              </a>
+            </div>
+          </nav>
+      </div>
     </div>
 
   </div>
@@ -51,5 +62,14 @@ export default {
 </script>
 
 <style lang="scss">
-
+.modal{
+  position: absolute;
+}
+.modal-content{
+  overflow: visible;
+}
+.modal.is-active{
+  display: block;
+  padding-top: 20px;
+}
 </style>

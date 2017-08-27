@@ -28,14 +28,15 @@ new Vue({
   data: {
       posts: [],
       search_metadata: {},
-      showModal: false,
       modalData: {
         screen_name: "",
         image_url: "",
         text: "",
         id_str: "",
-        post_url: ""
-      }
+        post_url: "",
+        modalHeight: 0
+      },
+      showModal: false
   },
   methods: {
         tryAddOptions: function(meta){
@@ -63,7 +64,8 @@ new Vue({
             this.modalData.screen_name = this.posts[index].user_screen_name;
             this.modalData.text = this.posts[index].text;
             this.modalData.post_url = URL + this.posts[index].user_screen_name + "/status/" + this.posts[index].id_str;
-            this.showModal = true
+            this.showModal = true;
+            this.modalData.modalHeight = document.body.clientHeight; 
         },
         closeModal: function(){
             this.showModal = false

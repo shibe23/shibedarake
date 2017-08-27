@@ -11543,14 +11543,15 @@ new Vue({
     data: {
         posts: [],
         search_metadata: {},
-        showModal: false,
         modalData: {
             screen_name: "",
             image_url: "",
             text: "",
             id_str: "",
-            post_url: ""
-        }
+            post_url: "",
+            modalHeight: 0
+        },
+        showModal: false
     },
     methods: {
         tryAddOptions: function tryAddOptions(meta) {
@@ -11581,6 +11582,7 @@ new Vue({
             this.modalData.text = this.posts[index].text;
             this.modalData.post_url = URL + this.posts[index].user_screen_name + "/status/" + this.posts[index].id_str;
             this.showModal = true;
+            this.modalData.modalHeight = document.body.clientHeight;
         },
         closeModal: function closeModal() {
             this.showModal = false;
@@ -12508,6 +12510,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -12631,7 +12644,7 @@ exports.push([module.i, "\n.masonry__tile {\n  width: 33%;\n  box-sizing: border
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(10)();
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\n.modal {\n  position: absolute;\n}\n.modal-content {\n  overflow: visible;\n}\n.modal.is-active {\n  display: block;\n  padding-top: 20px;\n}\n", ""]);
 
 /***/ }),
 /* 38 */
@@ -25646,7 +25659,10 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "modal is-active"
+    staticClass: "modal is-active",
+    attrs: {
+      "id": "modal"
+    }
   }, [_c('div', {
     staticClass: "modal-background",
     on: {
@@ -25656,17 +25672,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "modal-content"
+  }, [_c('div', {
+    staticClass: "card"
+  }, [_c('div', {
+    staticClass: "card-image"
   }, [_c('figure', {
     staticClass: "image"
   }, [_c('img', {
     attrs: {
       "src": _vm.modalData.image_url
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "media-content"
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "card-content"
   }, [_c('div', {
+    staticClass: "media"
+  }, [_c('div', {
+    staticClass: "media-content"
+  }, [_c('p', {
+    staticClass: "title is-4"
+  }, [_vm._v(_vm._s(_vm.modalData.screen_name))])])]), _vm._v(" "), _c('div', {
     staticClass: "content"
-  }, [_c('p', [_c('strong', [_vm._v("John Smith")]), _vm._v(" "), _c('small', [_vm._v("@johnsmith")]), _vm._v(" "), _c('small', [_vm._v("31m")]), _vm._v(" "), _c('br'), _vm._v("\n          " + _vm._s(_vm.modalData.text) + "\n        ")])]), _vm._v(" "), _vm._m(0)])]), _vm._v(" "), _c('button', {
+  }, [_vm._v("\n          " + _vm._s(_vm.modalData.text) + "\n        ")]), _vm._v(" "), _vm._m(0)])])]), _vm._v(" "), _c('button', {
     staticClass: "modal-close is-large",
     attrs: {
       "aria-label": "close"
