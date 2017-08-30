@@ -13,7 +13,7 @@ class PostController extends Controller
         $q .= "#柴犬". " ";
 
         $param['q'] = $q;
-        $param['count'] = "30";
+        $param['count'] = "50";
         $param['result_type'] = 'recent';
         $param['include_entities'] = true;
 

@@ -34,7 +34,8 @@ new Vue({
         text: "",
         id_str: "",
         post_url: "",
-        modalHeight: 0
+        modalHeight: 0,
+        modalPadTop: 20
       },
       showModal: false
   },
@@ -66,6 +67,8 @@ new Vue({
             this.modalData.post_url = URL + this.posts[index].user_screen_name + "/status/" + this.posts[index].id_str;
             this.showModal = true;
             this.modalData.modalHeight = document.body.clientHeight; 
+            this.modalData.modalPadTop = document.body.scrollTop + 20;
+            console.log(this.modalData.modalPadTop)
         },
         closeModal: function(){
             this.showModal = false

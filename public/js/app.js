@@ -11549,7 +11549,8 @@ new Vue({
             text: "",
             id_str: "",
             post_url: "",
-            modalHeight: 0
+            modalHeight: 0,
+            modalPadTop: 20
         },
         showModal: false
     },
@@ -11583,6 +11584,8 @@ new Vue({
             this.modalData.post_url = URL + this.posts[index].user_screen_name + "/status/" + this.posts[index].id_str;
             this.showModal = true;
             this.modalData.modalHeight = document.body.clientHeight;
+            this.modalData.modalPadTop = document.body.scrollTop + 20;
+            console.log(this.modalData.modalPadTop);
         },
         closeModal: function closeModal() {
             this.showModal = false;
@@ -12518,9 +12521,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -12637,7 +12637,7 @@ VueMasonryPlugin.install = function (Vue, options) {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(10)();
-exports.push([module.i, "\n.masonry__tile {\n  width: 33%;\n  box-sizing: border-box;\n  padding: 5px 10px;\n  margin-bottom: 10px;\n  background-color: #FFF;\n  border-radius: 4px;\n}\n", ""]);
+exports.push([module.i, "\n.masonry__tile {\n  width: 33%;\n  box-sizing: border-box;\n  padding: 5px 10px;\n  margin-bottom: 10px;\n  background-color: #FFF;\n  border-radius: 8px;\n}\n.card {\n  padding-top: 8px;\n  padding-left: 8px;\n  padding-right: 8px;\n  border-radius: 8px;\n}\n", ""]);
 
 /***/ }),
 /* 37 */
@@ -25704,7 +25704,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('nav', {
+  return _c('div', {
+    staticClass: "media-content"
+  }, [_c('nav', {
     staticClass: "level is-mobile"
   }, [_c('div', {
     staticClass: "level-left"
@@ -25726,7 +25728,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "icon is-small"
   }, [_c('i', {
     staticClass: "fa fa-heart"
-  })])])])])
+  })])])])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

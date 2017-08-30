@@ -31,6 +31,12 @@ export default {
     padding: 5px 10px;
     margin-bottom: 10px;
     background-color: #FFF;
-    border-radius: 4px;
-}    
+    border-radius: 8px;
+}
+.card{
+    padding-top: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 8px;
+}
 </style>

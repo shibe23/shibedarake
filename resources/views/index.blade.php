@@ -8,8 +8,8 @@
         <title>Shibadake</title>
         <!--<link href="/css/sanitize.css" rel="stylesheet" type="text/css">-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css" rel="stylesheet" type="text/css">
-        <link href="/css/app.css" rel="stylesheet" type="text/css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" rel="stylesheet" type="text/css">
+        <!--<link href="/css/app.css" rel="stylesheet" type="text/css">-->
         <style type="text/css">
           .wrapper{
             padding:0.5%;
@@ -18,9 +18,9 @@
         <!--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">-->
     </head>
     <body>
-    <section class="hero is-primary">
+    <section class="hero is-primary is-medium">
       <div class="hero-body">
-        <div class="container">
+        <div class="container has-text-centered">
           <h1 class="title">
             Shibedarake
           </h1>
@@ -36,7 +36,7 @@
         <!--  <div class="masonry__tile" v-for="(post, index) in posts">-->
         <!--      <a @click="open(index)"><img class="tile__image" :src="post.media_url" alt="Image"></a>-->
         <!--  </div>            -->
-        <modal :modal-data="modalData" :show-modal="showModal" :posts="posts" v-if="showModal" @close="closeModal" :style="{ 'height': $data.modalData.modalHeight + 'px' }"></modal>
+        <modal :modal-data="modalData" :show-modal="showModal" :posts="posts" v-if="showModal" @close="closeModal" :style="{ 'height': $data.modalData.modalHeight + 'px', 'padding-top': $data.modalData.modalPadTop + 'px' }"></modal>
         <button @click="getNewPosts($data.search_metadata.max_id)">next</button>
       </div>
 
