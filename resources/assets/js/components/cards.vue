@@ -26,12 +26,19 @@ export default {
 
 <style lang="scss">
 .masonry__tile{
-    width: 33%;
+    width: 32%;
     box-sizing: border-box;
-    padding: 5px 10px;
+    padding: 8px;
+    margin-left:0.66%;
+    margin-right:0.66%;
     margin-bottom: 10px;
     background-color: #FFF;
-    border-radius: 8px;
+    border-radius: 4px;
+    
+    a {
+        display: block;
+        line-height: 1;
+    }
 }
 .card{
     padding-top: 8px;

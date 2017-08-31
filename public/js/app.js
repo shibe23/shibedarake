@@ -12637,7 +12637,7 @@ VueMasonryPlugin.install = function (Vue, options) {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(10)();
-exports.push([module.i, "\n.masonry__tile {\n  width: 33%;\n  box-sizing: border-box;\n  padding: 5px 10px;\n  margin-bottom: 10px;\n  background-color: #FFF;\n  border-radius: 8px;\n}\n.card {\n  padding-top: 8px;\n  padding-left: 8px;\n  padding-right: 8px;\n  border-radius: 8px;\n}\n", ""]);
+exports.push([module.i, "\n.masonry__tile {\n  width: 32%;\n  box-sizing: border-box;\n  padding: 8px;\n  margin-left: 0.66%;\n  margin-right: 0.66%;\n  margin-bottom: 10px;\n  background-color: #FFF;\n  border-radius: 4px;\n}\n.masonry__tile a {\n    display: block;\n    line-height: 1;\n}\n.card {\n  padding-top: 8px;\n  padding-left: 8px;\n  padding-right: 8px;\n  border-radius: 8px;\n}\n", ""]);
 
 /***/ }),
 /* 37 */

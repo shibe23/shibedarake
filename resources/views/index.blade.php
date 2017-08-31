@@ -7,22 +7,66 @@
 
         <title>Shibadake</title>
         <!--<link href="/css/sanitize.css" rel="stylesheet" type="text/css">-->
+        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css" rel="stylesheet" type="text/css">
         <!--<link href="/css/app.css" rel="stylesheet" type="text/css">-->
         <style type="text/css">
+          body{background-color: #efefef;}
           .wrapper{
             padding:0.5%;
+          }
+          .container > .title{
+            font-family: 'Pacifico', cursive;
+            font-size: 70px;
+            font-weight: normal;
           }
         </style>
         <!--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">-->
     </head>
     <body>
     <section class="hero is-primary is-medium">
+     <div class="hero-head">
+        <header class="nav">
+          <div class="container">
+            <div class="nav-left">
+              <a class="nav-item">
+                <img src="images/bulma-type-white.png" alt="Logo">
+              </a>
+            </div>
+            <span class="nav-toggle">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <div class="nav-right nav-menu">
+              <a class="nav-item is-active">
+                Home
+              </a>
+              <a class="nav-item">
+                Examples
+              </a>
+              <a class="nav-item">
+                Documentation
+              </a>
+              <span class="nav-item">
+                <a class="button is-primary is-inverted">
+                  <span class="icon">
+                    <i class="fa fa-github"></i>
+                  </span>
+                  <span>Download</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </header>
+      </div>
+
+
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title">
-            Shibedarake
+            Shibadarake
           </h1>
           <h2 class="subtitle">
             That is how to find the earliest Shiba Inu.
