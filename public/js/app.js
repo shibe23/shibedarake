@@ -11538,9 +11538,10 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_masonry__["a" /* default */]);
 Vue.component('cards', __webpack_require__(47));
 Vue.component('modal', __webpack_require__(48));
 
-new Vue({
+var vm = new Vue({
     el: '#app',
     data: {
+        post_count: 30,
         posts: [],
         search_metadata: {},
         modalData: {
@@ -11552,7 +11553,8 @@ new Vue({
             modalHeight: 0,
             modalPadTop: 20
         },
-        showModal: false
+        showModal: false,
+        flg_getNetPosts: false
     },
     methods: {
         tryAddOptions: function tryAddOptions(meta) {
@@ -11568,12 +11570,24 @@ new Vue({
         getNewPosts: function getNewPosts(meta) {
             var _this = this;
 
+            var tmp_meta = meta;
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/post', this.tryAddOptions(meta)).then(function (response) {
                 _this.posts = _this.posts.concat(response.data.statuses);
                 _this.search_metadata = response.data.search_metadata;
+                // 未取得の内容であればフラグをOFF
+                if (tmp_meta !== _this.search_metadata) {
+                    _this.flg_getNetPosts = false;
+                }
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        handleScroll: function handleScroll(e) {
+            if (document.body.scrollTop > document.body.offsetHeight / 2 && !this.flg_getNetPosts) {
+                console.info('get new post start');
+                this.flg_getNetPosts = true;
+                this.getNewPosts(this.search_metadata.max_id);
+            }
         },
         openModal: function openModal(index) {
             var URL = "https://twitter.com/";
@@ -11593,8 +11607,15 @@ new Vue({
     },
     mounted: function mounted() {
         this.getNewPosts();
+        window.addEventListener('scroll', this.handleScroll);
     }
 });
+
+// window.addEventListener('scroll', function(e){
+//   if ((e.target.scrollTop + e.target.offsetHeight) >= e.target.scrollHeight) {
+// console.info('下端までスクロールされたよ');
+//   }    
+// })
 
 /***/ }),
 /* 14 */

@@ -23,9 +23,10 @@ Vue.use(VueMasonryPlugin);
 Vue.component('cards', require('./components/cards.vue'));
 Vue.component('modal', require('./components/modal.vue'));
 
-new Vue({
+var vm = new Vue({
   el: '#app',
   data: {
+      post_count: 30,
       posts: [],
       search_metadata: {},
       modalData: {
@@ -37,7 +38,8 @@ new Vue({
         modalHeight: 0,
         modalPadTop: 20
       },
-      showModal: false
+      showModal: false,
+      flg_getNetPosts: false
   },
   methods: {
         tryAddOptions: function(meta){
@@ -51,12 +53,24 @@ new Vue({
             return params;
         },
         getNewPosts: function(meta){
+            var tmp_meta = meta;
             axios.post('/post', this.tryAddOptions(meta))
             .then((response) => {
                 this.posts = this.posts.concat(response.data.statuses);
                 this.search_metadata = response.data.search_metadata;
+                // 未取得の内容であればフラグをOFF
+                if (tmp_meta !== this.search_metadata) {
+                    this.flg_getNetPosts = false;    
+                }
             })
             .catch((error) => { console.log(error); });
+        },
+        handleScroll: function (e){
+          if (document.body.scrollTop > document.body.offsetHeight / 2 && !this.flg_getNetPosts) {
+            console.info('get new post start');
+            this.flg_getNetPosts = true;
+            this.getNewPosts(this.search_metadata.max_id);
+          }    
         },
         openModal: function(index){
             var URL = "https://twitter.com/"
@@ -76,5 +90,13 @@ new Vue({
   },
   mounted() {
       this.getNewPosts ();
-  } 
+      window.addEventListener('scroll', this.handleScroll);
+
+  }
 })
+
+// window.addEventListener('scroll', function(e){
+//   if ((e.target.scrollTop + e.target.offsetHeight) >= e.target.scrollHeight) {
+    // console.info('下端までスクロールされたよ');
+//   }    
+// })
