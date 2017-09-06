@@ -11543,6 +11543,8 @@ var vm = new Vue({
     data: {
         post_count: 30,
         posts: [],
+        // ghost: [],
+        // fire_h: [0],
         search_metadata: {},
         modalData: {
             screen_name: "",
@@ -11583,12 +11585,26 @@ var vm = new Vue({
             });
         },
         handleScroll: function handleScroll(e) {
-            if (document.body.scrollTop > document.body.offsetHeight / 2 && !this.flg_getNetPosts) {
+            var scrollTop = document.body.scrollTop;
+            var offsetH = document.body.offsetHeight;
+
+            if (scrollTop > offsetH / 2 && !this.flg_getNetPosts) {
                 console.info('get new post start');
                 this.flg_getNetPosts = true;
                 this.getNewPosts(this.search_metadata.max_id);
+
+                // n番目から30個分の配列のimage_urlをno_imageに書き換える
+                // this.fire_h.push(scrollTop);
+                // this.replaceImages();
             }
         },
+        // replaceImages: function(){
+        //   for (var i=0; i<=this.post_count; i++){
+        //     if(this.posts[i].media_url === "undefined"){ return };
+        //     this.ghost.push(this.posts[i].media_url);
+        //     this.posts[i].media_url = "http://via.placeholder.com/150x150/";
+        //   }  
+        // },
         openModal: function openModal(index) {
             var URL = "https://twitter.com/";
             this.modalData.image_url = this.posts[index].media_url;
@@ -11610,12 +11626,6 @@ var vm = new Vue({
         window.addEventListener('scroll', this.handleScroll);
     }
 });
-
-// window.addEventListener('scroll', function(e){
-//   if ((e.target.scrollTop + e.target.offsetHeight) >= e.target.scrollHeight) {
-// console.info('下端までスクロールされたよ');
-//   }    
-// })
 
 /***/ }),
 /* 14 */

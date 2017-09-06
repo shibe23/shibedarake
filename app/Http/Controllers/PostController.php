@@ -28,7 +28,7 @@ class PostController extends Controller
 
         foreach ((array)$values->statuses as $value) {
             $data = [];
-
+            $data += array('id'=> count($statuses));
             // entities以外にmediaが存在している場合があるため、entities内にある場合のみに絞る
             $checkMediaExists = isset($value->entities->media);
             if($checkMediaExists) {
