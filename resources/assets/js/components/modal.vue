@@ -19,21 +19,6 @@
         <div class="content">
           {{ modalData.text}}
         </div>
-        <div class="media-content">
-          <nav class="level is-mobile">
-            <div class="level-left">
-              <a class="level-item">
-                <span class="icon is-small"><i class="fa fa-reply"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-              </a>
-              <a class="level-item">
-                <span class="icon is-small"><i class="fa fa-heart"></i></span>
-              </a>
-            </div>
-          </nav>        </div>
-
       </div>
     </div>
 
@@ -57,16 +42,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss">
-.modal{
-  position: absolute;
-}
-.modal-content{
-  overflow: visible;
-}
-.modal.is-active{
-  display: block;
-  padding-top: 20px;
-}
-</style>

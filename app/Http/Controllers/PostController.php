@@ -9,8 +9,11 @@ class PostController extends Controller
     public function fetch() {
         $q = "";
         $q .= "filter:images". " ";
-        $q .= "-RT". " ";
         $q .= "#柴犬". " ";
+        $q .= "-RT". " ";
+        $q .= "-#lineスタンプ". " ";
+        $q .= "-#スタンプ". " ";
+        $q .= "-#犬グッズ". " ";
 
         $param['q'] = $q;
         $param['count'] = "30";

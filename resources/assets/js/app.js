@@ -11,6 +11,7 @@ window.Laravel = { csrfToken: $('meta[name=csrf-token]').attr("content") };
 window.Vue = require('vue');
 import axios from 'axios';
 import VueMasonryPlugin from 'vue-masonry';
+
 Vue.use(VueMasonryPlugin);
 
 /**
@@ -26,10 +27,8 @@ Vue.component('modal', require('./components/modal.vue'));
 var vm = new Vue({
   el: '#app',
   data: {
-      post_count: 30,
+      postCount: 30,
       posts: [],
-      // ghost: [],
-      // fire_h: [0],
       search_metadata: {},
       modalData: {
         screen_name: "",
@@ -60,6 +59,7 @@ var vm = new Vue({
             .then((response) => {
                 this.posts = this.posts.concat(response.data.statuses);
                 this.search_metadata = response.data.search_metadata;
+
                 // 未取得の内容であればフラグをOFF
                 if (tmp_meta !== this.search_metadata) {
                     this.flg_getNetPosts = false;    
@@ -67,27 +67,45 @@ var vm = new Vue({
             })
             .catch((error) => { console.log(error); });
         },
-        handleScroll: function (e){
-          var scrollTop = document.body.scrollTop;
-          var offsetH = document.body.offsetHeight;
+        checkHiddenPosts: function(e){
+          var win_h = $(window).height();
+          var scrollTop = $(window).scrollTop();
 
-          if (scrollTop > offsetH / 2 && !this.flg_getNetPosts) {
-            console.info('get new post start');
+          // 一番上にある表示されているcardの座標を取得
+          if($('.isShow').eq(0).length){
+            var target = $('.isShow').eq(0).offset().top;
+            var data = $('.isShow').eq(0).data('index');
+          }
+
+          if (scrollTop > (target + 500) && typeof target !== "undefined"){
+            // 非表示処理
+            while(scrollTop - (win_h / 2) > target){
+              $('.isShow').eq(0).addClass('isHide');
+              $('.isShow').eq(0).removeClass('isShow');
+              target = $('.isShow').eq(0).offset().top;
+            }
+          }
+
+          if (scrollTop < (target + 500) && typeof target !== "undefined"){
+            // 表示処理
+            var num = $('.isHide').length -1 ;
+            $('.isHide').eq(num).addClass('isShow');
+            $('.isHide').eq(num).removeClass('isHide');
+            target = $('.isShow').eq(0).offset().top;
+          }
+          
+          // 一番↓にある表示されているcardの座標を取得
+          var target_end = $('.isShow').length
+
+          if($('.isShow').last()){
+            var target_b = $('.isShow').last().offset().top;
+          }
+
+          if (scrollTop > target_b - win_h && !this.flg_getNetPosts){
             this.flg_getNetPosts = true;
             this.getNewPosts(this.search_metadata.max_id);
-            
-            // n番目から30個分の配列のimage_urlをno_imageに書き換える
-            // this.fire_h.push(scrollTop);
-            // this.replaceImages();
-          }    
+          }
         },
-        // replaceImages: function(){
-        //   for (var i=0; i<=this.post_count; i++){
-        //     if(this.posts[i].media_url === "undefined"){ return };
-        //     this.ghost.push(this.posts[i].media_url);
-        //     this.posts[i].media_url = "http://via.placeholder.com/150x150/";
-        //   }  
-        // },
         openModal: function(index){
             var URL = "https://twitter.com/"
             this.modalData.image_url = this.posts[index].media_url;
@@ -97,8 +115,7 @@ var vm = new Vue({
             this.modalData.post_url = URL + this.posts[index].user_screen_name + "/status/" + this.posts[index].id_str;
             this.showModal = true;
             this.modalData.modalHeight = document.body.clientHeight; 
-            this.modalData.modalPadTop = document.body.scrollTop + 20;
-            console.log(this.modalData.modalPadTop)
+            this.modalData.modalPadTop = $(window).scrollTop() + 20;
         },
         closeModal: function(){
             this.showModal = false
@@ -106,7 +123,6 @@ var vm = new Vue({
   },
   mounted() {
       this.getNewPosts ();
-      window.addEventListener('scroll', this.handleScroll);
-
+      window.addEventListener('scroll', this.checkHiddenPosts);
   }
 })
