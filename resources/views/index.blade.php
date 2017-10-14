@@ -19,7 +19,7 @@
               Shibadarake
             </h1>
             <h2 class="subtitle">
-              That is how to find the earliest Shiba Inu.
+              The Best way to find your favorite Shiba-inu.
             </h2>
           </div>
         </div>
