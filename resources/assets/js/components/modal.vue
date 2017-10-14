@@ -3,7 +3,7 @@
   <div class="modal-background" @click="close()"></div>
   <div class="modal-content">
 
-    <div class="card">
+    <div class="card" :style="{height: modalData.modalHeight}">
       <div class="card-image">
         <figure class="image">
           <img :src="modalData.image_url">

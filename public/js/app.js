@@ -21558,7 +21558,9 @@ var vm = new Vue({
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/post', this.tryAddOptions(meta)).then(function (response) {
         _this.posts = _this.posts.concat(response.data.statuses);
         _this.search_metadata = response.data.search_metadata;
-
+        setTimeout(function () {
+          _this.modalData.modalHeight = document.body.clientHeight;
+        }, 2000);
         // 未取得の内容であればフラグをOFF
         if (tmp_meta !== _this.search_metadata) {
           _this.flg_getNetPosts = false;
@@ -25408,7 +25410,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }), _vm._v(" "), _c('div', {
     staticClass: "modal-content"
   }, [_c('div', {
-    staticClass: "card"
+    staticClass: "card",
+    style: ({
+      height: _vm.modalData.modalHeight
+    })
   }, [_c('div', {
     staticClass: "card-image"
   }, [_c('figure', {

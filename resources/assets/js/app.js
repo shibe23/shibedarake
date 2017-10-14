@@ -59,7 +59,7 @@ var vm = new Vue({
             .then((response) => {
                 this.posts = this.posts.concat(response.data.statuses);
                 this.search_metadata = response.data.search_metadata;
-
+                setTimeout(()=> {this.modalData.modalHeight = document.body.clientHeight; }, 2000);
                 // 未取得の内容であればフラグをOFF
                 if (tmp_meta !== this.search_metadata) {
                     this.flg_getNetPosts = false;    
